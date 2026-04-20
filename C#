@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+
+namespace UniversitetSistemi
+{
+    // Tələbə klassı
+    public class Telebe
+    {
+        // Tələbənin atributları
+        public int Id { get; set; }
+        public string Ad { get; set; }
+        public string Soyad { get; set; }
+        public int Yas { get; set; }
+        public double Ortalamasi { get; set; }
+
+        // Konstruktor
+        public Telebe(int id, string ad, string soyad, int yas, double ortalamasi)
+        {
+            Id = id;
+            Ad = ad;
+            Soyad = soyad;
+            Yas = yas;
+            Ortalamasi = ortalamasi;
+        }
+
+        // Tələbənin məlumatlarını ekrana çıxarmaq üçün metod
+        public void MelumatiGoster()
+        {
+            Console.WriteLine($"Tələbə ID: {Id}");
+            Console.WriteLine($"Adı: {Ad}");
+            Console.WriteLine($"Soyadı: {Soyad}");
+            Console.WriteLine($"Yaşı: {Yas}");
+            Console.WriteLine($"Ortalaması: {Ortalamasi}");
+            Console.WriteLine("---------------------");
+        }
+    }
+
+    // Universitet klassı
+    public class Universitet
+    {
+        // Universitetin atributları
+        public string Ad { get; set; }
+        public List<Telebe> Telebeler { get; set; }
+
+        // Konstruktor
+        public Universitet(string ad)
+        {
+            Ad = ad;
+            Telebeler = new List<Telebe>();
+        }
+
+        // Universitetə tələbə əlavə etmək üçün metod
+        public void TelebeElaveEt(Telebe telebe)
+        {
+            Telebeler.Add(telebe);
+        }
+
+        // Universitetin bütün tələbələrini ekrana çıxarmaq üçün metod
+        public void TelebeleriGoster()
+        {
+            Console.WriteLine($"{Ad} Universitetinin Tələbələri:");
+            foreach (var telebe in Telebeler)
+            {
+                telebe.MelumatiGoster();
+            }
+        }
+    }
+
+    // Əsas proqram
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Yeni universitet yaradırıq
+            Universitet univ = new Universitet("ADA");
+
+            // Yeni tələbələr yaradırıq
+            Telebe telebe1 = new Telebe(1, "Əli", "Vəliyev", 20, 3.8);
+            Telebe telebe2 = new Telebe(2, "Məmməd", "Həsənov", 21, 3.5);
+
+            // Tələbələri universitetə əlavə edirik
+            univ.TelebeElaveEt(telebe1);
+            univ.TelebeElaveEt(telebe2);
+
+            // Universitetin tələbələrini göstəririk
+            univ.TelebeleriGoster();
+
+            Console.ReadKey();
+        }
+    }
+}
